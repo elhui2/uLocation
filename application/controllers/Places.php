@@ -126,6 +126,8 @@ class Places extends CI_Controller {
     /**
      * places_json
      * @version 0.1
+     * @deprecated since version 0.2
+     * @uses controlador API metodo get
      * @return json de los lugares
      * Listado de lugares en json
      */
