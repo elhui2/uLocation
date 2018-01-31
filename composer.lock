@@ -4,9 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "425582499c09ce5b5eebb2abb6dc2111",
-    "content-hash": "163eb4764cfceda4201e2d993dd1e79d",
-    "packages": [],
+    "hash": "c24dc83b1947ebc59a06711bf5145872",
+    "content-hash": "07e7da139d1b0dea9928be5cf992b71c",
+    "packages": [
+        {
+            "name": "tinymce/tinymce",
+            "version": "4.7.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tinymce/tinymce-dist.git",
+                "reference": "e8f54e06b2e93fa446c8788a4198d3027600ab61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/e8f54e06b2e93fa446c8788a4198d3027600ab61",
+                "reference": "e8f54e06b2e93fa446c8788a4198d3027600ab61",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "tinymce.js",
+                        "plugins/*/plugin.js",
+                        "themes/*/theme.js"
+                    ],
+                    "files": [
+                        "tinymce.min.js",
+                        "plugins/*/plugin.min.js",
+                        "themes/*/theme.min.js",
+                        "skins/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "description": "Web based JavaScript HTML WYSIWYG editor control.",
+            "homepage": "http://www.tinymce.com",
+            "keywords": [
+                "editor",
+                "html",
+                "javascript",
+                "richtext",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2018-01-29 13:34:32"
+        }
+    ],
     "packages-dev": [
         {
             "name": "mikey179/vfsStream",

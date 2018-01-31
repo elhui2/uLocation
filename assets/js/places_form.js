@@ -58,6 +58,17 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    tinymce.init({
+        selector: '#description',
+        height: 320,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor textcolor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code help wordcount'
+        ],
+        toolbar: 'formatselect | bold italic  | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat'
+    });
 
 });
 
