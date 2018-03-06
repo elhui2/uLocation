@@ -67,6 +67,7 @@ function addRow(marker) {
             '<h6 class="media-heading strong">' + marker.name + '</h6>' +
             '<p>' + marker.address + ' <br>A ' + distancia + ' Km de distancia</p>' +
             '<a class="btn btn-sm btn-info" href="https://maps.google.com/maps?saddr=' + CurLat + ' ' + CurLng + '&amp;daddr=' + marker.lat + ' ' + marker.lng + '" target="_blank">Como llegar?</a>' +
+            '<a class="btn btn-sm btn-info" href="/lugares/'+marker.url+'">Más</a>' +
             '</div> ' +
             '</div>';
 

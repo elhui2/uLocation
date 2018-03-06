@@ -53,6 +53,7 @@ $route['default_controller'] = 'Places';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['tlatoani'] = 'users';
+//$route['tlatoani'] = 'users';
 $route['logout'] = 'users/logout';
 $route['login'] = 'users';
+$route['lugares/(:any)'] = 'places/view/$1';

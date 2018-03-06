@@ -82,6 +82,27 @@ class Places_tb extends CI_Model {
             return FALSE;
         }
     }
+    
+    /**
+     * sort
+     * @return type
+     */
+    public function sort($filter = FALSE) {
+
+        if ($filter) {
+            foreach ($filter as $key => $param) {
+                $this->db->where($key, $param);
+            }
+        }
+
+        $result = $this->db->get($this->env['name']);
+
+        if ($result->num_rows()) {
+            return $result->result_array();
+        } else {
+            return FALSE;
+        }
+    }
 
     /**
      * save_places

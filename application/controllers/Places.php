@@ -2,7 +2,7 @@
 
 /**
  * Places
- * @version 0.1
+ * @version 0.3
  * @author Daniel Huidobro <daniel.hui287@gmail.com>
  * Controlador de lugares
  */
@@ -74,20 +74,26 @@ class Places extends CI_Controller {
                 'lng' => $this->input->post('longitud'),
                 'id_user' => $this->session->userdata('id')
             );
+            
+            if($this->input->post('description')){
+                $dataPlace['description'] = $this->input->post('description');
+            }
             //Marranada u.u 
             //hacer otra funcion
             if ($id) {
                 $place = $this->places_tb->read($id);
                 if (!$place) {
-                    redirect('/places/form?message=error');
+                    redirect('/places/form/'.$id.'?message=error');
                 } else {
                     if ($this->places_tb->update($dataPlace, $id)) {
-                        redirect('/places/form?message=success');
+                        redirect('/places/form/'.$id.'?message=success');
                     } else {
-                        redirect('/places/form?message=error');
+                        redirect('/places/form/'.$id.'?message=error');
                     }
                 }
             } else {
+                $this->load->helper('friendly_url');
+                $dataPlace['url'] = friendly_url($this->input->post('name'));
                 if ($this->places_tb->create($dataPlace)) {
                     redirect('/places/form?message=success');
                 } else {
@@ -121,6 +127,16 @@ class Places extends CI_Controller {
         } else {
             return $this->ajax_response(500, FALSE, 'Ocurrio un error, intenta mas tarde');
         }
+    }
+    
+    /**
+     * place
+     * @param string $url url del lugar
+     */
+    public function view($url){
+        $place = $this->places_tb->sort(array('url'=>$url))[0];
+        $data_view = array('place'=>$place);
+        $this->load->view('place', $data_view);
     }
 
     /**
