@@ -1,9 +1,9 @@
 <?php
 /**
  * admin
- * @version 0.1
+ * @version 0.4
  * @author Daniel Huidobro <daniel@geekvibes.mx>
- * Vista de login
+ * Vista de un lugar
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
@@ -19,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <body>
         <?php $this->load->view('menu'); ?>
         <div class="container margin-top">
+            <img src="<?php echo base_url('uploads/' . $place['image']) ?>" alt="<?php echo $place['name'] ?>" class="img-responsive">
             <div class="row" id="messenger"></div>
             <h2><?php echo $place['name'] ?></h2>
             <p><?php echo $place['address'] ?></p>

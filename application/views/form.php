@@ -1,9 +1,9 @@
 <?php
 /**
  * form.php
- * @version 0.3
- * @author Daniel Huidobro <daniel@geekvibes.mx>
- * Agregar un lugar
+ * @version 0.4
+ * @author Daniel Huidobro <daniel@rebootproject.mx>
+ * Formulario para agregar un lugar
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
@@ -11,17 +11,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="author" content="Daniel Huidobro <daniel@rebootproject.mx>">
-        <meta name="description" content="Template de geolocalización">
+        <meta name="author" content="Daniel Huidobro daniel@rebootproject.mx">
+        <meta name="description" content="Form to save a place">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <title><?php echo (isset($place)) ? 'Editar' : 'Agregar' ?> Lugar</title>
     </head>
 
     <body>
         <?php $this->load->view('menu'); ?>
-        <div class="container-fluid">
-            <div class="row" style="padding-top: 60px;">
-                <h1 class="text-center"><?php echo (isset($place)) ? 'Editar' : 'Agregar' ?> Lugar</h1>
+        <div class="container-fluid" style="padding-top: 60px;">
+            <h1><?php echo (isset($place)) ? 'Editar' : 'Agregar' ?> Lugar</h1>
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="map-col-6" id="mapa-places"></div>
+                </div>
+
                 <div class="col-lg-6">
 
                     <?php
@@ -35,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     echo validation_errors();
                     ?>
 
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <?php
                         if (isset($place)) {
                             ?>
@@ -43,6 +48,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php
                         }
                         ?>
+                        <div class="form-group">
+                            <?php
+                            if (isset($place['image']) && !empty($place['image'])) {
+                                ?>
+                                <img src="<?php echo base_url('uploads/') . $place['image']; ?>" class="img-responsive">
+                                <?php
+                            }
+                            ?>
+                            <label for="image">Imagen</label>
+                            <input type="file" id="image" name="image" required>
+                        </div>
+
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input type="text" class="form-control" id="name" placeholder="Nombre del lugar" name="name" required value="<?php echo (isset($place)) ? $place['name'] : '' ?>">
@@ -81,9 +98,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
                     </form>
-                </div>    
-                <div class="col-lg-6">
-                    <div class="map-col-6" id="mapa-places"></div>
                 </div>
             </div>    
         </div>

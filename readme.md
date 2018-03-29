@@ -1,5 +1,8 @@
 # uLocation
-### Version 0.2 Horda
+### Version 0.4 Horda
+
+- Imagen de lugar
+- Nueva versión de la base de datos
 
 uLocation es una plantilla realizada en Codeigniter PHP, MySQL, Google Maps API V3 y Bootstrap con administrador de puntos en un mapa.
 

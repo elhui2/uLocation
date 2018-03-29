@@ -2,7 +2,7 @@
 
 /**
  * Places
- * @version 0.3
+ * @version 0.4
  * @author Daniel Huidobro <daniel.hui287@gmail.com>
  * Controlador de lugares
  */
@@ -44,7 +44,7 @@ class Places extends CI_Controller {
 
     /**
      * form
-     * @version 0.1
+     * @version 0.4
      * @access logged
      * Agregar, editar un lugar un lugar
      */
@@ -74,21 +74,49 @@ class Places extends CI_Controller {
                 'lng' => $this->input->post('longitud'),
                 'id_user' => $this->session->userdata('id')
             );
-            
-            if($this->input->post('description')){
+
+            if ($this->input->post('description')) {
                 $dataPlace['description'] = $this->input->post('description');
             }
+
+            if (!empty($_FILES['image']) && $_FILES['image']['error'] == 0) {
+
+                $extPic = '';
+                switch ($_FILES['image']['type']) {
+                    case 'image/png':
+                        $extPic = '.png';
+                        break;
+                    default:
+                        $extPic = '.jpg';
+                }
+
+                $picture = md5(date('YmdHis')) . $extPic;
+
+                $config['upload_path'] = 'uploads';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['file_name'] = $picture;
+                $config['max_size'] = '4096';
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('image')) {
+                    error_log(json_encode($this->upload->display_errors()));
+                    redirect('/places/form/' . $id . '?message=error');
+                }
+
+                $dataPlace['image'] = $picture;
+            }
+
             //Marranada u.u 
             //hacer otra funcion
             if ($id) {
                 $place = $this->places_tb->read($id);
                 if (!$place) {
-                    redirect('/places/form/'.$id.'?message=error');
+                    redirect('/places/form/' . $id . '?message=error');
                 } else {
                     if ($this->places_tb->update($dataPlace, $id)) {
-                        redirect('/places/form/'.$id.'?message=success');
+                        redirect('/places/form/' . $id . '?message=success');
                     } else {
-                        redirect('/places/form/'.$id.'?message=error');
+                        redirect('/places/form/' . $id . '?message=error');
                     }
                 }
             } else {
@@ -128,14 +156,14 @@ class Places extends CI_Controller {
             return $this->ajax_response(500, FALSE, 'Ocurrio un error, intenta mas tarde');
         }
     }
-    
+
     /**
      * place
      * @param string $url url del lugar
      */
-    public function view($url){
-        $place = $this->places_tb->sort(array('url'=>$url))[0];
-        $data_view = array('place'=>$place);
+    public function view($url) {
+        $place = $this->places_tb->sort(array('url' => $url))[0];
+        $data_view = array('place' => $place);
         $this->load->view('place', $data_view);
     }
 
